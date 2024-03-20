@@ -1,0 +1,20 @@
+import mysql2, { ConnectionOptions } from 'mysql2'
+
+const access: ConnectionOptions = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_SCHEMA,
+    rowsAsArray: true
+}
+
+export const dbConnection = mysql2.createConnection(access)
+
+dbConnection.connect((err) => {
+    if (err) {
+        console.error('Fail to connect into MySQL DB:')
+        console.error(err.message)
+    } else {
+        console.info('Connected into MySQL DB')
+    }
+})
